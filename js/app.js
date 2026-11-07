@@ -401,7 +401,7 @@
     var groups = {};
     list.forEach(function (b) { var g = b.group; (groups[g] = groups[g] || []).push(b); });
     return DATA.categories.filter(function (c) { return groups[c.id]; }).map(function (c) {
-      var arr = groups[c.id], unlocked = arr.filter(function (b) { return state.stars[b.index]; }).length;
+      var arr = groups[c.id].sort(function (a, b) { return a.order - b.order; }), unlocked = arr.filter(function (b) { return state.stars[b.index]; }).length;
       return '<div class="cat-group"><div class="cat-group-head"><h3>' + catChip(c.id) + '</h3><span class="count">' + unlocked + "/" + arr.length + ' unlocked</span></div><div class="badge-grid">' + arr.map(badgeCardHtml).join("") + "</div></div>";
     }).join("");
   }

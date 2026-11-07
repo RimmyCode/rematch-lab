@@ -2,7 +2,7 @@
    Game data (c) Sloclap. Compilation (c) 2026 Rimmy (KHBIN), all rights reserved. */
 window.REMATCH_DATA = {
  "meta": {
-  "generatedAt": "2026-11-07T02:52:08+00:00",
+  "generatedAt": "2026-11-07T04:19:34+00:00",
   "configVersion": "cb2c2792-af0f-4771-8053-f1c302198bbe",
   "equipSlots": 3,
   "ranks": 4,
@@ -86,7 +86,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 50
   },
   {
    "id": "Acrobat",
@@ -102,7 +103,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 26
   },
   {
    "id": "AerialTouch",
@@ -118,7 +120,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 32
   },
   {
    "id": "AgressiveKeeper",
@@ -135,7 +138,8 @@ window.REMATCH_DATA = {
     150,
     350
    ],
-   "unit": ""
+   "unit": "",
+   "order": 47
   },
   {
    "id": "AltruistDribbler",
@@ -152,7 +156,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 74
   },
   {
    "id": "AnkleBreaker",
@@ -169,7 +174,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 72
   },
   {
    "id": "Assist",
@@ -185,7 +191,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 2
   },
   {
    "id": "BackPass",
@@ -202,7 +209,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 66
   },
   {
    "id": "BackToFront",
@@ -219,7 +227,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 22
   },
   {
    "id": "Barrier",
@@ -235,7 +244,8 @@ window.REMATCH_DATA = {
     250,
     1000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 80
   },
   {
    "id": "Blitz",
@@ -252,7 +262,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 57
   },
   {
    "id": "Block",
@@ -268,7 +279,8 @@ window.REMATCH_DATA = {
     200,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 27
   },
   {
    "id": "BoxToBox",
@@ -285,7 +297,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 87
   },
   {
    "id": "Bullseye",
@@ -301,7 +314,8 @@ window.REMATCH_DATA = {
     500,
     1000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 14
   },
   {
    "id": "Bump",
@@ -317,7 +331,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 33
   },
   {
    "id": "Captain",
@@ -333,7 +348,8 @@ window.REMATCH_DATA = {
     3,
     5
    ],
-   "unit": ""
+   "unit": "",
+   "order": 98
   },
   {
    "id": "Center",
@@ -349,7 +365,8 @@ window.REMATCH_DATA = {
     300,
     1000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 83
   },
   {
    "id": "Cheerleader",
@@ -365,7 +382,8 @@ window.REMATCH_DATA = {
     500,
     1000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 91
   },
   {
    "id": "CleanSheet",
@@ -382,7 +400,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 12
   },
   {
    "id": "CoinAfterCoin",
@@ -398,7 +417,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 97
   },
   {
    "id": "ColdBlood",
@@ -415,7 +435,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 70
   },
   {
    "id": "Comeback",
@@ -432,7 +453,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 44
   },
   {
    "id": "Connection",
@@ -449,7 +471,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 54
   },
   {
    "id": "Control",
@@ -465,7 +488,8 @@ window.REMATCH_DATA = {
     2000,
     5000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 17
   },
   {
    "id": "Creator",
@@ -482,7 +506,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 77
   },
   {
    "id": "Crossbar",
@@ -498,7 +523,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 64
   },
   {
    "id": "Dauntless",
@@ -515,7 +541,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 48
   },
   {
    "id": "DefensiveMarking",
@@ -532,7 +559,8 @@ window.REMATCH_DATA = {
     1.5,
     4.0
    ],
-   "unit": "min"
+   "unit": "min",
+   "order": 21
   },
   {
    "id": "Denied",
@@ -548,7 +576,8 @@ window.REMATCH_DATA = {
     100,
     200
    ],
-   "unit": ""
+   "unit": "",
+   "order": 35
   },
   {
    "id": "Diver",
@@ -565,7 +594,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 49
   },
   {
    "id": "Doorman",
@@ -581,7 +611,8 @@ window.REMATCH_DATA = {
     5.0,
     15.0
    ],
-   "unit": "min"
+   "unit": "min",
+   "order": 34
   },
   {
    "id": "Duellist",
@@ -597,7 +628,8 @@ window.REMATCH_DATA = {
     1000,
     2500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 73
   },
   {
    "id": "Equalizer",
@@ -614,7 +646,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 40
   },
   {
    "id": "ExtraEffort",
@@ -630,7 +663,8 @@ window.REMATCH_DATA = {
     2500,
     5000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 24
   },
   {
    "id": "ExtraJob",
@@ -647,7 +681,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 29
   },
   {
    "id": "Extrovert",
@@ -663,7 +698,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 60
   },
   {
    "id": "Flair",
@@ -680,7 +716,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 58
   },
   {
    "id": "Free",
@@ -696,7 +733,8 @@ window.REMATCH_DATA = {
     5.0,
     10.0
    ],
-   "unit": "min"
+   "unit": "min",
+   "order": 78
   },
   {
    "id": "GetOffMe",
@@ -712,7 +750,8 @@ window.REMATCH_DATA = {
     1000,
     5000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 76
   },
   {
    "id": "Ghost",
@@ -728,7 +767,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 95
   },
   {
    "id": "Globetrotter",
@@ -744,7 +784,8 @@ window.REMATCH_DATA = {
     0.3,
     1.0
    ],
-   "unit": "km"
+   "unit": "km",
+   "order": 1
   },
   {
    "id": "Goal",
@@ -760,7 +801,8 @@ window.REMATCH_DATA = {
     200,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 0
   },
   {
    "id": "GoodCall",
@@ -777,7 +819,8 @@ window.REMATCH_DATA = {
     500,
     1000
    ],
-   "unit": ""
+   "unit": "",
+   "order": 46
   },
   {
    "id": "Grounded",
@@ -793,7 +836,8 @@ window.REMATCH_DATA = {
     200,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 82
   },
   {
    "id": "GuardianAngel",
@@ -810,7 +854,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 45
   },
   {
    "id": "HatTrick",
@@ -826,7 +871,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 19
   },
   {
    "id": "Header",
@@ -842,7 +888,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 69
   },
   {
    "id": "IllDoItMyself",
@@ -859,7 +906,8 @@ window.REMATCH_DATA = {
     10,
     25
    ],
-   "unit": ""
+   "unit": "",
+   "order": 71
   },
   {
    "id": "InTheBox",
@@ -876,7 +924,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 84
   },
   {
    "id": "Interception",
@@ -893,7 +942,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 4
   },
   {
    "id": "Interceptor",
@@ -910,7 +960,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 10
   },
   {
    "id": "Killjoy",
@@ -927,7 +978,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 65
   },
   {
    "id": "LastSurprise",
@@ -944,7 +996,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 79
   },
   {
    "id": "Liberator",
@@ -961,7 +1014,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 43
   },
   {
    "id": "LongShot",
@@ -978,7 +1032,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 94
   },
   {
    "id": "LookUp",
@@ -995,7 +1050,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 88
   },
   {
    "id": "LowKick",
@@ -1011,7 +1067,8 @@ window.REMATCH_DATA = {
     300,
     750
    ],
-   "unit": ""
+   "unit": "",
+   "order": 15
   },
   {
    "id": "Loyal",
@@ -1027,7 +1084,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 61
   },
   {
    "id": "LuckyStrike",
@@ -1044,7 +1102,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 90
   },
   {
    "id": "Maestro",
@@ -1061,7 +1120,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 11
   },
   {
    "id": "MVP",
@@ -1077,7 +1137,8 @@ window.REMATCH_DATA = {
     50,
     125
    ],
-   "unit": ""
+   "unit": "",
+   "order": 20
   },
   {
    "id": "NoLook",
@@ -1094,7 +1155,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 93
   },
   {
    "id": "NoMatch",
@@ -1110,7 +1172,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 13
   },
   {
    "id": "NoOvertime",
@@ -1127,7 +1190,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 51
   },
   {
    "id": "NoSpidersHere",
@@ -1144,7 +1208,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 89
   },
   {
    "id": "NotDoneYet",
@@ -1161,7 +1226,8 @@ window.REMATCH_DATA = {
     10,
     25
    ],
-   "unit": ""
+   "unit": "",
+   "order": 41
   },
   {
    "id": "NotInMyHouse",
@@ -1178,7 +1244,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 67
   },
   {
    "id": "OnThePitch",
@@ -1194,7 +1261,8 @@ window.REMATCH_DATA = {
     300,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 5
   },
   {
    "id": "OneTwo",
@@ -1211,7 +1279,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 68
   },
   {
    "id": "OnlyNeedMe",
@@ -1228,7 +1297,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 75
   },
   {
    "id": "Pass",
@@ -1244,7 +1314,8 @@ window.REMATCH_DATA = {
     1000,
     2500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 18
   },
   {
    "id": "Pest",
@@ -1261,7 +1332,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 31
   },
   {
    "id": "PlayingPool",
@@ -1278,7 +1350,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 55
   },
   {
    "id": "PowerOfFriendship",
@@ -1294,7 +1367,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 62
   },
   {
    "id": "PowerTackle",
@@ -1311,7 +1385,8 @@ window.REMATCH_DATA = {
     50,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 30
   },
   {
    "id": "RainbowFlick",
@@ -1327,7 +1402,8 @@ window.REMATCH_DATA = {
     100,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 86
   },
   {
    "id": "RapidFire",
@@ -1343,7 +1419,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 25
   },
   {
    "id": "Relay",
@@ -1360,7 +1437,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 8
   },
   {
    "id": "Remontada",
@@ -1376,7 +1454,8 @@ window.REMATCH_DATA = {
     10,
     25
    ],
-   "unit": ""
+   "unit": "",
+   "order": 96
   },
   {
    "id": "SafeCall",
@@ -1393,7 +1472,8 @@ window.REMATCH_DATA = {
     150,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 37
   },
   {
    "id": "Save",
@@ -1409,7 +1489,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 3
   },
   {
    "id": "Savior",
@@ -1426,7 +1507,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 9
   },
   {
    "id": "Scorer",
@@ -1443,7 +1525,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 7
   },
   {
    "id": "SixthSense",
@@ -1459,7 +1542,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 53
   },
   {
    "id": "Spotlight",
@@ -1476,7 +1560,8 @@ window.REMATCH_DATA = {
     10,
     25
    ],
-   "unit": ""
+   "unit": "",
+   "order": 42
   },
   {
    "id": "Sweeper",
@@ -1492,7 +1577,8 @@ window.REMATCH_DATA = {
     50,
     150
    ],
-   "unit": ""
+   "unit": "",
+   "order": 36
   },
   {
    "id": "Swipe",
@@ -1508,7 +1594,8 @@ window.REMATCH_DATA = {
     300,
     750
    ],
-   "unit": ""
+   "unit": "",
+   "order": 16
   },
   {
    "id": "TapIn",
@@ -1524,7 +1611,8 @@ window.REMATCH_DATA = {
     25,
     100
    ],
-   "unit": ""
+   "unit": "",
+   "order": 85
   },
   {
    "id": "TeamUp",
@@ -1540,7 +1628,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 99
   },
   {
    "id": "TeamworkOP",
@@ -1556,7 +1645,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 59
   },
   {
    "id": "Terminator",
@@ -1573,7 +1663,8 @@ window.REMATCH_DATA = {
     10,
     25
    ],
-   "unit": ""
+   "unit": "",
+   "order": 39
   },
   {
    "id": "ThatsIn",
@@ -1590,7 +1681,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 38
   },
   {
    "id": "TheWall",
@@ -1606,7 +1698,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 52
   },
   {
    "id": "Thief",
@@ -1622,7 +1715,8 @@ window.REMATCH_DATA = {
     250,
     500
    ],
-   "unit": ""
+   "unit": "",
+   "order": 28
   },
   {
    "id": "Threat",
@@ -1638,7 +1732,8 @@ window.REMATCH_DATA = {
     50,
     150
    ],
-   "unit": ""
+   "unit": "",
+   "order": 56
   },
   {
    "id": "Throwback",
@@ -1655,7 +1750,8 @@ window.REMATCH_DATA = {
     150,
     350
    ],
-   "unit": ""
+   "unit": "",
+   "order": 63
   },
   {
    "id": "TimesUp",
@@ -1672,7 +1768,8 @@ window.REMATCH_DATA = {
     10,
     25
    ],
-   "unit": ""
+   "unit": "",
+   "order": 92
   },
   {
    "id": "TipToe",
@@ -1689,7 +1786,8 @@ window.REMATCH_DATA = {
     100,
     250
    ],
-   "unit": ""
+   "unit": "",
+   "order": 23
   },
   {
    "id": "Winner",
@@ -1705,7 +1803,8 @@ window.REMATCH_DATA = {
     150,
     300
    ],
-   "unit": ""
+   "unit": "",
+   "order": 6
   },
   {
    "id": "ZigZag",
@@ -1722,7 +1821,8 @@ window.REMATCH_DATA = {
     25,
     50
    ],
-   "unit": ""
+   "unit": "",
+   "order": 81
   }
  ],
  "titleLines": [
