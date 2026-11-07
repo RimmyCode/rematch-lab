@@ -109,6 +109,7 @@ svg.i.sm { width: 16px; height: 16px; }
   font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; line-height: 1.6;
   padding: 0 6px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-dim);
 }
+.brand-tag { display: none; } /* UNOFFICIAL pill hidden for now (footer already says it) - delete this line to show it again */
 .tabs { display: flex; justify-content: center; gap: 4px; height: 100%; overflow-x: auto; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
