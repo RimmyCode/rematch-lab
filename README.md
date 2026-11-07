@@ -1,4 +1,4 @@
-# REMATCH Helper - hosted site
+# REMATCH Lab - hosted site
 
 Deployed copy of the unofficial REMATCH title/badge companion. Only the files the browser needs
 are here; the offline data tooling is not part of this repository.

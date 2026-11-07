@@ -1,5 +1,5 @@
 /*!
- * REMATCH Helper
+ * REMATCH Lab
  * Copyright (c) 2026 Rimmy (KHBIN). All rights reserved.
  * This is proprietary software. Copying, modifying, re-hosting or redistributing this file, in whole or in part,
  * without written permission is prohibited. See LICENSE.
@@ -1176,7 +1176,7 @@
     var local = !h || h === "localhost" || h === "127.0.0.1" || h === "[::1]" || location.protocol === "file:";
     if (!OFFICIAL_HOSTS.length || local || OFFICIAL_HOSTS.indexOf(h) >= 0) return;
     var b = $("#copy-banner");
-    b.innerHTML = "This is an unauthorized copy of REMATCH Helper." + (OFFICIAL_URL ? ' Please use the original at <a href="' + esc(OFFICIAL_URL) + '">' + esc(OFFICIAL_URL) + "</a>." : "");
+    b.innerHTML = "This is an unauthorized copy of REMATCH Lab." + (OFFICIAL_URL ? ' Please use the original at <a href="' + esc(OFFICIAL_URL) + '">' + esc(OFFICIAL_URL) + "</a>." : "");
     b.hidden = false;
   }
 
@@ -1192,7 +1192,7 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closePopover(); });
     S.allCombos();
     route();
-    if (window.console) console.info("%cREMATCH Helper", "font-weight:700;color:#5b4bff", "\n© 2026 All rights reserved. Unauthorized copying or re-hosting is prohibited. REMATCH © Sloclap.");
+    if (window.console) console.info("%cREMATCH Lab", "font-weight:700;color:#5b4bff", "\n© 2026 All rights reserved. Unauthorized copying or re-hosting is prohibited. REMATCH © Sloclap.");
   }
   boot();
 })();

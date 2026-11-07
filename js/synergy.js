@@ -1,5 +1,5 @@
 /*!
- * REMATCH Helper - synergy engine
+ * REMATCH Lab - synergy engine
  * Copyright (c) 2026 Rimmy (KHBIN). All rights reserved.
  * Unauthorized copying, modification or redistribution of this file is prohibited. See LICENSE.
  *
