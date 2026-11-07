@@ -104,6 +104,11 @@ svg.i.sm { width: 16px; height: 16px; }
 }
 .brand-mark svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; }
 .brand small { display: block; font-weight: 500; font-size: 11px; color: var(--text-dim); letter-spacing: 0; }
+.brand-name { display: flex; align-items: center; gap: 7px; }
+.brand-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; line-height: 1.6;
+  padding: 0 6px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-dim);
+}
 .tabs { display: flex; justify-content: center; gap: 4px; height: 100%; overflow-x: auto; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
@@ -487,6 +492,7 @@ dialog::backdrop { background: rgba(10, 10, 14, .45); backdrop-filter: blur(2px)
   .topbar { grid-template-columns: auto 1fr auto; gap: 12px; padding: 0 16px; }
   .topbar .tabs { display: none; }
   .brand small { display: none; }
+  .brand-tag { display: none; } /* tight on phones; the footer and About keep the disclaimer */
   .search { justify-self: end; }
   .search input { width: 100%; max-width: 200px; }
   .shell { grid-template-columns: minmax(0, 1fr); }
