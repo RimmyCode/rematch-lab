@@ -1,0 +1,30 @@
+REMATCH Helper - Proprietary License
+
+Copyright (c) 2026 Rimmy (KHBIN). All rights reserved.
+
+This repository and everything in it (source code, design, styles, text, documentation and the
+tools in /tools, together the "Software") is proprietary. It is NOT open source, and no open-source
+license applies, even though the files may be publicly visible.
+
+1. Permitted use. You may visit and use the official hosted website for personal, non-commercial
+   purposes.
+
+2. Restrictions. Without prior written permission from the copyright holder you may NOT:
+   a. copy, reproduce, mirror, re-host or republish the Software or any substantial part of it;
+   b. modify, adapt, translate or create derivative works based on the Software;
+   c. distribute, sublicense, sell, rent or otherwise make the Software available to others;
+   d. remove or alter any copyright, trademark or attribution notice;
+   e. use the Software, or its output, to build a competing or substantially similar product.
+
+3. Forks. Forking this repository on GitHub, where allowed by GitHub's Terms of Service, grants
+   no rights beyond viewing it. Publishing, deploying or hosting a fork is not permitted.
+
+4. Third-party material. REMATCH, its names, badges, titles, contracts and all other game data
+   are the property of Sloclap. They are referenced here for informational purposes only and
+   are not covered by this license. This project is unofficial and is not affiliated with,
+   endorsed, sponsored or approved by Sloclap.
+
+5. No warranty. The Software is provided "as is", without warranty of any kind. In no event shall
+   the author be liable for any claim, damages or other liability arising from its use.
+
+For permission requests, contact the repository owner.
