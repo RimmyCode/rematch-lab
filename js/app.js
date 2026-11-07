@@ -1187,7 +1187,6 @@
     bindSearch();
     bindShare();
     checkHost();
-    $("#avatar").addEventListener("click", function () { go("about"); });
     window.addEventListener("hashchange", route);
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closePopover(); });
     S.allCombos();
