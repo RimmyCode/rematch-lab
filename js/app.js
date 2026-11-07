@@ -21,7 +21,6 @@
   var DATA = window.REMATCH_DATA;
   var S = window.RematchSynergy.create(DATA);
   var N = S.badges.length;
-  var FLAG = 1 << 21;
   var CONTRACTS = DATA.contracts;
   var PLAN_CONTRACTS = CONTRACTS.filter(function (c) { return c.slots > 0; });
   var CATS = {};
@@ -127,8 +126,8 @@
         var v = arr[n], a = st[v & 127], b = st[(v >> 7) & 127], c = st[(v >> 14) & 127];
         if (!a || !b || !c) continue;
         if (r) { var s = sortDesc3(a, b, c); if (s[0] < r[0] || s[1] < r[1] || s[2] < r[2]) continue; }
-        var t = a > b ? (a > c ? a : c) : (b > c ? b : c);
-        var score = ((v & FLAG) ? 0 : 4) + pur[n];
+        var t = a < b ? (a < c ? a : c) : (b < c ? b : c); // tier = lowest badge level
+        var score = 4 + pur[n];
         if (t > best || (t === best && score > bestScore)) { best = t; bestV = v; bestScore = score; if (best === 4 && score === 7) break; }
       }
       return { tier: best, combo: bestV };
@@ -148,7 +147,7 @@
       var res = [null, { cost: 99, combo: -1, score: -1 }, { cost: 99, combo: -1, score: -1 }, { cost: 99, combo: -1, score: -1 }, { cost: 99, combo: -1, score: -1 }];
       for (var n = 0; n < arr.length; n++) {
         var v = arr[n], s = sortDesc3(st[v & 127], st[(v >> 7) & 127], st[(v >> 14) & 127]);
-        var score = ((v & FLAG) ? 0 : 4) + pur[n];
+        var score = 4 + pur[n];
         for (var k = 1; k <= 4; k++) {
           var nd = needs[k];
           var cost = Math.max(0, nd[0] - s[0]) + Math.max(0, nd[1] - s[1]) + Math.max(0, nd[2] - s[2]);
@@ -643,9 +642,9 @@
 
   /* ================================================================ Page: Combinations */
   function ruleText(line) {
-    if (line.kind === "single") return "<b>" + esc(CATS[line.cats[0]].name) + "</b> must be the single most common category across the three badges' category tags (a hybrid badge counts for both of its categories).";
-    if (line.kind === "pair") return "<b>" + esc(CATS[line.cats[0]].name) + "</b> and <b>" + esc(CATS[line.cats[1]].name) + "</b> must be tied as the most common categories (for example 2 and 2, or 3 and 3), and the set must not fall into the 3+ categories rule.";
-    return "Three or more different categories where the top two counts tie and the next category appears exactly once (1-1-1, 2-2-1, 1-1-1-1 …).";
+    if (line.kind === "single") return "<b>" + esc(CATS[line.cats[0]].name) + "</b> must be the only category with the highest count across the three badges' category tags (a hybrid badge counts for both of its categories).";
+    if (line.kind === "pair") return "<b>" + esc(CATS[line.cats[0]].name) + "</b> and <b>" + esc(CATS[line.cats[1]].name) + "</b> must be the only two categories tied for the highest count (for example 2 and 2 with anything else at 1, or 3 and 3).";
+    return "Three or more categories tied for the highest count (for example 1-1-1, or three hybrids at 2-2-2).";
   }
   function comboRows(title) {
     var f = state.combos, all = S.allCombos(), arr = all.byLine[title.line.index], pur = all.purity[title.line.index], st = state.stars;
@@ -674,9 +673,8 @@
   function nameKey(v) {
     var k = nameKeyCache[v];
     if (k === undefined) {
-      var idx = comboIdx(v), sens = (v & FLAG) !== 0;
-      var names = idx.map(function (i) { return S.badges[i].name; });
-      k = nameKeyCache[v] = (sens ? names : names.slice().sort()).join("|");
+      var names = comboIdx(v).map(function (i) { return S.badges[i].name; });
+      k = nameKeyCache[v] = names.sort().join("|");
     }
     return k;
   }
@@ -695,14 +693,13 @@
       (removable ? '<button class="x" data-exclude="' + esc(b.id) + '" aria-label="Exclude ' + esc(b.name) + '" title="Exclude this badge">' + icon("x", "sm") + "</button>" : "") + "</span>";
   }
   function comboHtml(row, title) {
-    var v = row.v, idx = comboIdx(v), sens = (v & FLAG) !== 0;
+    var v = row.v, idx = comboIdx(v);
     var nd = needsVec(title.star, reqsFor(state.combos.contract)), need = assignNeeds(idx, nd);
     var counts = S.countCategories(idx.map(function (i) { return S.badges[i]; }));
     return '<div class="card combo"><div><div class="combo-badges">' + idx.map(function (i) { return bchipHtml(i, need[i], true); }).join("") + "</div>" +
       '<div class="count-line" style="margin-top:8px">' + counts.map(function (c) { return '<span class="cat" style="--c:' + CATS[c.cat].color + '">' + esc(CATS[c.cat].name) + " × " + c.count + "</span>"; }).join("") + "</div></div>" +
       '<div class="combo-meta">' + (row.cost === 0 ? '<span class="badge-status ok">' + icon("check", "sm") + "Ready</span>" : '<span class="badge-status warn">+' + plural(row.cost, "star") + "</span>") +
-      '<button class="btn sm" data-plan-combo="' + v + '">' + icon("route", "sm") + "Plan</button></div>" +
-      (sens ? '<div class="combo-note">' + icon("alert", "sm") + "Slot order matters for this set: assign " + idx.map(function (i) { return esc(S.badges[i].name); }).join(" → ") + " (slot 1 to 3).</div>" : "") + "</div>";
+      '<button class="btn sm" data-plan-combo="' + v + '">' + icon("route", "sm") + "Plan</button></div></div>";
   }
   function comboFiltersHtml(title) {
     var f = state.combos;
@@ -740,7 +737,7 @@
       '<div class="card title-hero"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h2>' + esc(title.name) + "</h2>" + starsHtml(title.star) + "</div>" +
       '<div class="chips">' + lineChips(title.line) + "</div>" +
       '<p class="rule">' + ruleText(title.line) + "</p>" +
-      '<p class="rule">Tier: the <b>highest</b> badge in the set decides it, so at least one badge must be ' + (title.star === 4 ? "<b>" + TOP + "</b>" : "<b>" + title.star + "★</b> or higher") + "." +
+      '<p class="rule">Tier: the <b>lowest</b> badge in the set decides it, so all three badges must be ' + (title.star === 4 ? "<b>" + TOP + "</b>" : "<b>" + title.star + "★</b> or higher") + "." +
       (lowerTiers.length ? " Earning it also unlocks " + lowerTiers.join(", ") + " if you don't have them yet." : "") + "</p></div>" +
       '<div class="section-head" style="margin-top:22px"><h2>' + fmt(rows.length) + (rows.length === 1 ? " set" : " sets") + "</h2>" +
       '<span class="dim" style="font-size:12.5px">' + (rows.filter(function (r) { return r.cost === 0; }).length) + " ready with your badges</span></div>" +
@@ -810,7 +807,7 @@
     if (sb.some(function (x) { return !x; })) return null;
     var res = S.evaluateOrdered(sb.map(function (x) { return x.b; }));
     var stars = sb.map(function (x) { return x.star; });
-    var tier = Math.max.apply(null, stars);
+    var tier = S.tierOf(stars);
     return { res: res, tier: tier, stars: stars, meets: S.meetsReqs(stars, c.reqs), sb: sb };
   }
   function planTarget(cid, key, autoFill) {
@@ -844,7 +841,7 @@
         if (mineOnly && (!st[i] || !st[j] || !st[k])) continue;
         var s = sortDesc3(st[i], st[j], st[k]);
         var cost = Math.max(0, nd[0] - s[0]) + Math.max(0, nd[1] - s[1]) + Math.max(0, nd[2] - s[2]);
-        var score = ((v & FLAG) ? 0 : 4) + pur[n];
+        var score = 4 + pur[n];
         if (!best || cost < best.cost || (cost === best.cost && score > best.score)) best = { v: v, cost: cost, score: score };
         if (best.cost === 0 && best.score === 7) break;
       }
@@ -882,11 +879,12 @@
   function whyHtml(r) {
     var counts = r.res.counts.map(function (x) { return esc(CATS[x.cat].name) + " " + x.count; }).join(", ");
     var step;
-    if (r.res.branch === "polyvalent") step = "3+ categories and the counts form the 1-1-1 / 2-2-1 pattern → <b>" + esc(POLY.name) + "</b> line.";
-    else if (r.res.branch === "pair") step = "Top two are tied (" + esc(CATS[r.res.pairCats[0]].name) + " and " + esc(CATS[r.res.pairCats[1]].name) + ") → " + (r.res.line ? "<b>" + esc(lineLabel(r.res.line)) + "</b> line." : "that pair has <b>no title line</b>, so this set gives nothing.");
-    else step = "One category leads (" + esc(CATS[r.res.counts[0].cat].name) + ") → <b>" + esc(lineLabel(r.res.line)) + "</b> line.";
-    return '<details class="why"><summary>Why this title?</summary><ol><li>Category tags counted in slot order: ' + counts + ".</li><li>" + step + "</li>" +
-      (r.res.line ? "<li>Highest badge is " + tierText(r.tier) + " → tier " + r.tier + ": <b>" + esc(r.res.line.tiers[r.tier - 1].name) + "</b>" + (r.tier > 1 ? ", plus the lower tiers of the line." : ".") + "</li>" : "") + "</ol></details>";
+    var tiedNames = r.res.tied.map(function (c) { return esc(CATS[c].name); }).join(", ");
+    if (r.res.branch === "polyvalent") step = r.res.tied.length + " categories tie for the top count (" + tiedNames + ") → <b>" + esc(POLY.name) + "</b> line.";
+    else if (r.res.branch === "pair") step = "Two categories tie for the top count (" + tiedNames + ") → " + (r.res.line ? "<b>" + esc(lineLabel(r.res.line)) + "</b> line." : "that pair has <b>no title line</b>, so this set gives nothing.");
+    else step = "One category has the top count (" + tiedNames + ") → <b>" + esc(lineLabel(r.res.line)) + "</b> line.";
+    return '<details class="why"><summary>Why this title?</summary><ol><li>Category tags counted: ' + counts + ".</li><li>" + step + "</li>" +
+      (r.res.line ? "<li>Lowest badge is " + tierText(r.tier) + " → tier " + r.tier + ": <b>" + esc(r.res.line.tiers[r.tier - 1].name) + "</b>" + (r.tier > 1 ? ", plus the lower tiers of the line." : ".") + "</li>" : "") + "</ol></details>";
   }
   function contractCardHtml(c, n, earlier) {
     var p = planFor(c.id), r = planResult(c);
@@ -958,7 +956,7 @@
       '<button class="btn" data-act="clear-plan">Clear plan</button><button class="btn primary" data-act="copy-plan">' + icon("share", "sm") + "Copy plan</button>") +
       '<div class="stats" id="planner-stats">' + plannerStatsHtml() + "</div>" +
       '<div class="section"><div class="section-head"><h2>Your career</h2><label class="switch"><input type="checkbox" id="pl-mine"' + (state.planner.mineOnly ? " checked" : "") + '><span class="track"></span>Suggest only from badges I\'ve unlocked</label></div>' +
-      '<div class="callout" style="margin-bottom:16px">' + icon("info") + "<div>Badge levels in each slot are the levels you plan to have when you upgrade; they start at your current level (or the slot minimum). Amber means you still need to level that badge. The title tier comes from the highest badge in the set.</div></div>" +
+      '<div class="callout" style="margin-bottom:16px">' + icon("info") + "<div>Badge levels in each slot are the levels you plan to have when you upgrade; they start at your current level (or the slot minimum). Amber means you still need to level that badge. The title tier comes from the lowest badge in the set.</div></div>" +
       '<div class="contract-list">' + cards + "</div></div>";
     bindPlanner(root);
   }
@@ -1036,7 +1034,8 @@
       [[B("Goal"), B("Header"), B("Save")], "Attack 2, Goalkeeper 1", "Attack (the majority wins, no pair)"],
       [[B("GuardianAngel"), B("Remontada"), B("Save")], "Clutch 2, Goalkeeper 2", "Clutch + Goalkeeper (Boss → Angel)"],
       [[B("GuardianAngel"), B("NoOvertime"), B("Save")], "Goalkeeper 3, Clutch 2", "Goalkeeper (single)"],
-      [[B("GuardianAngel"), B("NoOvertime"), B("Goal")], "Clutch 2, Goalkeeper 2, Attack 1", "3+ categories (the 2-2-1 surprise)"],
+      [[B("GuardianAngel"), B("NoOvertime"), B("Goal")], "Clutch 2, Goalkeeper 2, Attack 1", "Clutch + Goalkeeper (Attack doesn't tie, so it doesn't count)"],
+      [[B("ColdBlood"), B("BackToFront"), B("GuardianAngel")], "Playmaking 2, Clutch 2, Goalkeeper 2", "3+ categories (all three tie)"],
       [[B("Goal"), B("Save"), B("Pass")], "1, 1, 1", "3+ categories"],
       [[B("LuckyStrike"), B("Goal"), B("Denied")], "Attack 2, Random 2", "Nothing: Attack + Random has no title line"]
     ];
@@ -1046,7 +1045,7 @@
       '<div class="card flow-step"><h4>Play matches</h4><p>Matches give contract XP. Your actions on the pitch also fill your badges.</p></div>' +
       '<div class="card flow-step"><h4>Level your badges</h4><p>Each badge has 4 levels, 1★ to 4★ (the game calls 4★ All-Star). Reaching 1★ unlocks it.</p></div>' +
       '<div class="card flow-step"><h4>Max your contract</h4><p>Reach the contract\'s last level, then assign 3 badges that meet its rank requirements.</p></div>' +
-      '<div class="card flow-step"><h4>Sign the next one</h4><p>The 3 badges\' categories pick a title line; your best badge picks the tier. You get it when you sign.</p></div></div></div>' +
+      '<div class="card flow-step"><h4>Sign the next one</h4><p>The 3 badges\' categories pick a title line; your lowest badge picks the tier. You get it when you sign.</p></div></div></div>' +
       '<div class="section"><div class="rule-grid">' +
       '<div class="card rule-card"><h3><span class="stat-icon">' + icon("shield") + "</span>Badges</h3><ul>" +
       "<li>There are <b>" + N + " badges</b> across <b>" + DATA.categories.length + " categories</b>: " + DATA.categories.map(function (c) { return esc(c.name); }).join(", ") + ".</li>" +
@@ -1060,16 +1059,16 @@
       "<li>The 3 badges stay <b>linked to that contract</b> as part of your career history.</li></ul></div></div></div>" +
       '<div class="section"><div class="section-head"><h2>Contract ladder</h2></div>' + contractTable + "</div>" +
       '<div class="section"><div class="section-head"><h2>How the synergy title is picked</h2></div><div class="prose">' +
-      "<ol><li><b>Count category tags.</b> Go through the 3 badges in slot order and count every category they carry. A hybrid badge adds 1 to each of its two categories.</li>" +
-      "<li><b>Sort by count</b>, highest first.</li>" +
-      "<li><b>3+ categories:</b> if there are three or more categories, the top two are tied, and the third appears exactly once, you get the <b>" + esc(POLY.name) + "</b> line.</li>" +
-      "<li><b>Pair:</b> otherwise, if the top two categories are tied, you get that pair's line. Only " + lines.filter(function (l) { return l.kind === "pair"; }).length + " pairs have a line. Any other pair gives <b>no title</b>.</li>" +
-      "<li><b>Single:</b> otherwise the most common category's line.</li>" +
-      "<li><b>Tier</b> = your <b>highest</b> badge in the set (1★ to " + TOP + "). You also get every lower tier of that line you don't have yet.</li></ol>" +
-      '<div class="callout warn">' + icon("alert") + "<div><b>Two surprises worth knowing.</b> Two Clutch + Goalkeeper hybrids plus one Attack badge (counts 2-2-1) give the <b>3+ categories</b> line, not Clutch + Goalkeeper. That comes straight from how the game compares the counts. And a pair only triggers when the two categories are <b>exactly tied</b>: Attack, Attack, Defense is an Attack title.</div></div>" +
+      "<ol><li><b>Count category tags.</b> Count every category the 3 badges carry. A hybrid badge adds 1 to each of its two categories. Slot order doesn't matter.</li>" +
+      "<li><b>Find the top.</b> Every category with the highest count is <b>tied</b>. These are the categories the game highlights next to your slots.</li>" +
+      "<li><b>3 or more tied:</b> you get the <b>" + esc(POLY.name) + "</b> line (" + esc(S.polyLine.tiers.map(function (t) { return t.name; }).join(" → ")) + ").</li>" +
+      "<li><b>2 tied:</b> you get that pair's line. Only " + lines.filter(function (l) { return l.kind === "pair"; }).length + " pairs have a line. Any other pair gives <b>no title</b>.</li>" +
+      "<li><b>1 on top:</b> you get that category's line.</li>" +
+      "<li><b>Tier</b> = your <b>lowest</b> badge in the set (1★ to " + TOP + "). You also get every lower tier of that line you don't have yet.</li></ol>" +
+      '<div class="callout warn">' + icon("alert") + "<div><b>Two things worth knowing.</b> The tier follows your <b>weakest</b> badge: a single 1★ badge in the set caps the title at 1★, even if the other two are " + TOP + ". And a pair only triggers when the two categories are <b>exactly tied</b> at the top: Attack, Attack, Defense is an Attack title.</div></div>" +
       '<div class="card table-wrap example-table" style="max-height:none"><table class="data"><thead><tr><th>Badges</th><th>Category counts</th><th>Result</th></tr></thead><tbody>' +
       ex.map(function (r) { return "<tr><td>" + r[0].map(esc).join(" · ") + '</td><td class="mono" style="font-size:12.5px">' + esc(r[1]) + "</td><td>" + esc(r[2]) + "</td></tr>"; }).join("") + "</tbody></table></div>" +
-      '<div class="callout">' + icon("info") + "<div>In one rare case (three hybrids forming a triangle such as A+B, B+C, A+C) all counts tie at 2, and the slot order decides which pair wins. The Combinations page flags those sets and tells you the order to use.</div></div></div></div>" +
+      '<div class="callout">' + icon("info") + "<div>Three hybrids that form a triangle (such as Cold blood, Back to front and Guardian angel) tie all three categories at 2, so they give a <b>" + esc(POLY.name) + "</b> title, not a pair.</div></div></div></div>" +
       '<div class="section"><div class="section-head"><h2>All ' + S.titles.length + " synergy titles</h2></div>" + lineTable + "</div>" +
       (cost.length ? '<div class="section"><div class="section-head"><h2>Title synergy crafting</h2></div><div class="prose"><p>Later contracts unlock the <b>title synergy crafting</b> feature: you can buy the title your assigned badges point to instead of waiting. The live price per tier is ' +
         cost.map(function (c, i) { return "<b>" + fmt(c) + "</b> (" + tierText(i + 1) + ")"; }).join(", ") + ". You can buy only the top title, or every lower tier you're missing in one go, which adds those prices together.</p></div></div>" : "") +

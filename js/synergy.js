@@ -3,13 +3,14 @@
  * Copyright (c) 2026 Rimmy (KHBIN). All rights reserved.
  * Unauthorized copying, modification or redistribution of this file is prohibited. See LICENSE.
  *
- * Mirrors the game client's badge-synergy evaluation (URuntimeContractsSubsystem):
- *   1. count every category tag of the 3 assigned badges, in slot order
- *   2. sort categories by count, descending (UE small-array selection sort; ties keep the earlier one)
- *   3. 3+ categories and (c0 == c1) == c2   -> "3+ categories" line   (C++ `a == b == c` evaluation)
- *      else top-2 counts tie                 -> the pair line of those two categories (none if no such line)
- *      else                                  -> the single line of the top category
- *   4. tier = highest star among the 3 badges; lower tiers of the same line are granted too.
+ * Mirrors how the game builds a contract's "unlockable titles" from the 3 assigned badges
+ * (contract view model: tied categories + the live title table):
+ *   1. count every category tag of the 3 badges (a hybrid badge counts for both of its categories)
+ *   2. tied = every category that has the highest count
+ *   3. 3+ tied        -> the "3+ categories" line
+ *      1 or 2 tied    -> the line whose categories are exactly the tied set (none if no such line)
+ *   4. tier = LOWEST badge level among the 3 (capped at 4); every lower tier of the line is granted too.
+ * Slot order never matters.
  */
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory();
@@ -17,22 +18,18 @@
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
 
-  var PERMS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
-
   function create(data) {
     var badges = data.badges.map(function (b, i) { return Object.assign({ index: i }, b); });
     var badgeById = {};
     badges.forEach(function (b) { badgeById[b.id] = b; });
     var lines = data.titleLines.map(function (l, i) { return Object.assign({ index: i }, l); });
     var lineById = {};
-    var singleByCat = {};
-    var pairByKey = {};
+    var lineByKey = {};
     var polyLine = null;
     lines.forEach(function (l) {
       lineById[l.id] = l;
-      if (l.kind === "single") singleByCat[l.cats[0]] = l;
-      else if (l.kind === "pair") pairByKey[l.cats.slice().sort().join("+")] = l;
-      else polyLine = l;
+      if (l.kind === "polyvalent") polyLine = l;
+      else lineByKey[l.cats.slice().sort().join("+")] = l;
     });
     var titles = [];
     lines.forEach(function (l) {
@@ -43,70 +40,48 @@
     var titleByKey = {};
     titles.forEach(function (t) { titleByKey[t.key] = t; });
 
-    /* ---------- core evaluation, slot order matters for exact ties ---------- */
-    function countCategories(slotBadges) {
+    /* ---------- core evaluation ---------- */
+    /** Category counts, highest first (ties keep first-seen order; display only). */
+    function countCategories(setBadges) {
       var keys = [], counts = {};
-      slotBadges.forEach(function (b) {
+      setBadges.forEach(function (b) {
         b.cats.forEach(function (c) {
           if (counts[c] === undefined) { counts[c] = 0; keys.push(c); }
           counts[c]++;
         });
       });
-      var arr = keys.map(function (k) { return { cat: k, count: counts[k] }; });
-      // UE Algo::IntroSort, partitions <= 8: repeatedly move the first lowest element to the end
-      for (var max = arr.length - 1; max > 0; max--) {
-        var m = 0;
-        for (var i = 1; i <= max; i++) if (arr[m].count > arr[i].count) m = i;
-        var tmp = arr[m]; arr[m] = arr[max]; arr[max] = tmp;
-      }
-      return arr;
+      return keys.map(function (k, i) { return { cat: k, count: counts[k], i: i }; })
+        .sort(function (a, b) { return b.count - a.count || a.i - b.i; })
+        .map(function (x) { return { cat: x.cat, count: x.count }; });
     }
 
-    function evaluateOrdered(slotBadges) {
-      var arr = countCategories(slotBadges);
-      var n = arr.length;
-      var res = { counts: arr, line: null, branch: "none", pairCats: null };
-      if (n >= 3 && ((arr[0].count === arr[1].count) ? 1 : 0) === arr[2].count) {
+    function evaluateOrdered(setBadges) {
+      var counts = countCategories(setBadges);
+      var res = { counts: counts, tied: [], line: null, branch: "none", pairCats: null };
+      if (!counts.length) return res;
+      var top = counts[0].count;
+      res.tied = counts.filter(function (c) { return c.count === top; }).map(function (c) { return c.cat; });
+      if (res.tied.length >= 3) {
         res.branch = "polyvalent";
         res.line = polyLine;
-      } else if (n >= 2 && arr[0].count === arr[1].count) {
-        res.branch = "pair";
-        res.pairCats = [arr[0].cat, arr[1].cat];
-        res.line = pairByKey[res.pairCats.slice().sort().join("+")] || null;
-      } else if (n >= 1) {
-        res.branch = "single";
-        res.line = singleByCat[arr[0].cat] || null;
+      } else {
+        res.branch = res.tied.length === 2 ? "pair" : "single";
+        if (res.tied.length === 2) res.pairCats = res.tied.slice();
+        res.line = lineByKey[res.tied.slice().sort().join("+")] || null;
       }
       return res;
     }
 
-    function isOrderSensitive(counts) {
-      // only the A+B / B+C / A+C triangle (2,2,2) leaves the pair choice to slot order
-      return counts.length >= 3 && counts[0].count === counts[1].count && counts[1].count === counts[2].count;
-    }
-
-    /** Evaluate a set of 3 badge indexes; returns every distinct outcome with an order that produces it. */
+    /** Evaluate a set of 3 badge indexes. Kept for callers that expect outcomes; order never matters. */
     function evaluateSet(idx) {
-      var bs = idx.map(function (i) { return badges[i]; });
-      var first = evaluateOrdered(bs);
-      if (!isOrderSensitive(first.counts)) {
-        return { orderSensitive: false, outcomes: [{ line: first.line, order: idx.slice(), result: first }] };
-      }
-      var seen = {}, outcomes = [];
-      PERMS.forEach(function (p) {
-        var order = [idx[p[0]], idx[p[1]], idx[p[2]]];
-        var r = evaluateOrdered(order.map(function (i) { return badges[i]; }));
-        var k = r.line ? r.line.id : "-";
-        if (!seen[k]) { seen[k] = true; outcomes.push({ line: r.line, order: order, result: r }); }
-      });
-      return { orderSensitive: true, outcomes: outcomes };
+      var r = evaluateOrdered(idx.map(function (i) { return badges[i]; }));
+      return { orderSensitive: false, outcomes: [{ line: r.line, order: idx.slice(), result: r }] };
     }
 
     /* ---------- every 3-badge set, grouped by the line it produces ---------- */
     var combosCache = null;
-    var ORDER_FLAG = 1 << 21;
-    function pack(a, b, c, flag) { return a | (b << 7) | (c << 14) | (flag ? ORDER_FLAG : 0); }
-    function unpack(v) { return { idx: [v & 127, (v >> 7) & 127, (v >> 14) & 127], orderSensitive: (v & ORDER_FLAG) !== 0 }; }
+    function pack(a, b, c) { return a | (b << 7) | (c << 14); }
+    function unpack(v) { return { idx: [v & 127, (v >> 7) & 127, (v >> 14) & 127], orderSensitive: false }; }
 
     function allCombos() {
       if (combosCache) return combosCache;
@@ -114,16 +89,8 @@
       var none = [];
       var N = badges.length;
       for (var i = 0; i < N; i++) for (var j = i + 1; j < N; j++) for (var k = j + 1; k < N; k++) {
-        var r = evaluateSet([i, j, k]);
-        if (!r.orderSensitive) {
-          var l = r.outcomes[0].line;
-          if (l) tmp[l.index].push(pack(i, j, k, false)); else none.push(pack(i, j, k, false));
-        } else {
-          r.outcomes.forEach(function (o) {
-            if (o.line) tmp[o.line.index].push(pack(o.order[0], o.order[1], o.order[2], true));
-            else none.push(pack(o.order[0], o.order[1], o.order[2], true));
-          });
-        }
+        var l = evaluateOrdered([badges[i], badges[j], badges[k]]).line;
+        if (l) tmp[l.index].push(pack(i, j, k)); else none.push(pack(i, j, k));
       }
       // purity = how many of the 3 badges only carry the line's own categories (cleaner examples first)
       var purity = tmp.map(function (arr, li) {
@@ -155,33 +122,20 @@
       return s.every(function (x) { return x >= 1; });
     }
 
-    /** Per-slot needs for a target tier under contract requirements (descending). */
+    /** Level each slot needs (descending) for a target tier: the tier needs ALL 3 badges at that level. */
     function needsFor(tier, reqs) {
       var r = sortDesc(reqs && reqs.length ? reqs : [1, 1, 1]);
       while (r.length < 3) r.push(1);
-      r[0] = Math.max(r[0], tier || 1);
-      return sortDesc(r);
+      return sortDesc(r.map(function (x) { return Math.max(x, tier || 1); }));
     }
 
-    /** Fewest star-levels to add so these badges reach the needs; returns {cost, assign:[need per badge]}. */
-    function upgradeCost(stars, needs) {
-      var best = null;
-      PERMS.forEach(function (p) {
-        var cost = 0, assign = [0, 0, 0];
-        for (var s = 0; s < 3; s++) {
-          var need = needs[p[s]];
-          assign[s] = need;
-          cost += Math.max(0, need - (stars[s] || 0));
-        }
-        if (!best || cost < best.cost) best = { cost: cost, assign: assign };
-      });
-      return best;
-    }
+    /** Tier a set of levels grants: the lowest level, capped at 4. */
+    function tierOf(stars) { return Math.min(4, Math.min.apply(null, stars)); }
 
     return {
       badges: badges, badgeById: badgeById, lines: lines, lineById: lineById, titles: titles, titleByKey: titleByKey,
       polyLine: polyLine, evaluateOrdered: evaluateOrdered, evaluateSet: evaluateSet, countCategories: countCategories,
-      allCombos: allCombos, unpack: unpack, meetsReqs: meetsReqs, needsFor: needsFor, upgradeCost: upgradeCost
+      allCombos: allCombos, unpack: unpack, meetsReqs: meetsReqs, needsFor: needsFor, tierOf: tierOf
     };
   }
 
