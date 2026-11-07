@@ -11,7 +11,7 @@
   /* ================================================================ Config */
   // Set these to your GitHub Pages address so copies hosted elsewhere show a warning banner.
   var OFFICIAL_HOSTS = ["rimmycode.github.io"]; // e.g. ["yourname.github.io"]
-  var OFFICIAL_URL = "https://rimmycode.github.io/rematch-helper/";   // e.g. "https://yourname.github.io/rematch-helper/"
+  var OFFICIAL_URL = "https://rimmycode.github.io/rematch-lab/";   // e.g. "https://yourname.github.io/rematch-lab/"
 
   // Layout / style switches - flip these to revert.
   var SHOW_SIDEBAR = false;  // true = bring back the left icon rail
