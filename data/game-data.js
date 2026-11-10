@@ -2,7 +2,7 @@
    Game data (c) Sloclap. Compilation (c) 2026 Rimmy (KHBIN), all rights reserved. */
 window.REMATCH_DATA = {
  "meta": {
-  "generatedAt": "2026-11-09T15:08:59+00:00",
+  "generatedAt": "2026-11-10T06:23:06+00:00",
   "configVersion": "cb2c2792-af0f-4771-8053-f1c302198bbe",
   "equipSlots": 3,
   "ranks": 4,
@@ -555,10 +555,10 @@ window.REMATCH_DATA = {
    ],
    "group": "Movement",
    "targets": [
-    0.25,
-    0.5,
-    1.5,
-    4.0
+    15,
+    30,
+    90,
+    240
    ],
    "unit": "min",
    "order": 21
@@ -607,10 +607,10 @@ window.REMATCH_DATA = {
    ],
    "group": "Goalkeeper",
    "targets": [
-    0.5,
-    1.5,
-    5.0,
-    15.0
+    30,
+    90,
+    300,
+    900
    ],
    "unit": "min",
    "order": 34
@@ -729,10 +729,10 @@ window.REMATCH_DATA = {
    ],
    "group": "Movement",
    "targets": [
-    0.25,
-    1.5,
-    5.0,
-    10.0
+    15,
+    90,
+    300,
+    600
    ],
    "unit": "min",
    "order": 78
@@ -780,10 +780,10 @@ window.REMATCH_DATA = {
    ],
    "group": "Movement",
    "targets": [
-    0.05,
-    0.1,
-    0.3,
-    1.0
+    50,
+    100,
+    300,
+    1000
    ],
    "unit": "km",
    "order": 1
