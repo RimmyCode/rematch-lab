@@ -448,6 +448,54 @@ table.data tbody tr:hover { background: var(--surface-alt); }
 .empty h3 { font-size: 17px; }
 .empty p { color: var(--text-dim); max-width: 420px; }
 
+/* ============================================================ Contract ladder rewards */
+.contract-table td { vertical-align: top; }
+.contract-table td:nth-child(4) { white-space: nowrap; }
+.req-groups { display: flex; flex-direction: column; } /* one requirement group per line, everywhere */
+.req-group { display: flex; align-items: center; gap: 6px; white-space: nowrap; line-height: 1; padding: 3px 0; }
+.req-group .mono { font-weight: 600; color: var(--text); min-width: 22px; }
+.rw { display: grid; gap: 7px; min-width: 300px; }
+.rw-row { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; align-items: start; }
+.rw-label { padding-top: 5px; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-dim); }
+.rw-items { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 26px; }
+.reward {
+  display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 8px;
+  background: color-mix(in srgb, var(--t) 10%, var(--surface-alt)); border: 1px solid color-mix(in srgb, var(--t) 35%, var(--border));
+  font-size: 12.5px; font-weight: 600; white-space: nowrap;
+}
+.reward::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: var(--t); flex: none; }
+.reward small { font-size: 11px; font-weight: 500; color: var(--text-dim); }
+.reward.title-chip { font-style: italic; }
+.reward.feature { background: var(--accent-soft); border-color: transparent; color: var(--accent-text); }
+.reward.feature::before { display: none; }
+.rw-money { font: 600 13px var(--mono); color: var(--text); }
+.rw-row .rw-items:not(:has(.reward)) { font-size: 12.5px; color: var(--text-dim); gap: 4px; }
+/* contract ladder shows the first half until "Show all" is pressed */
+.contract-table:not(.expanded) tr.ct-more { display: none !important; }
+.ct-toggle { display: flex; justify-content: center; margin-top: 12px; }
+.tier-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 12px; color: var(--text-dim); }
+.tier-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.tier-legend i { width: 8px; height: 8px; border-radius: 999px; background: var(--t); display: block; }
+@media (max-width: 600px) {
+  /* phones: each contract becomes a stacked card instead of a wide table row */
+  .contract-table table, .contract-table tbody, .contract-table tr, .contract-table td { display: block; width: 100%; }
+  .contract-table thead { display: none; }
+  .contract-table tr { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+  .contract-table tr:last-child { border-bottom: 0; }
+  .contract-table td { border: 0; padding: 0; }
+  .contract-table td.hide-sm { display: none; }
+  .contract-table .ct-name { font-size: 16px; margin-bottom: 8px; }
+  .contract-table td[data-label] { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+  .contract-table td[data-label]::before {
+    content: attr(data-label); flex: 0 0 120px; padding-top: 3px;
+    font: 700 10.5px var(--font); letter-spacing: .06em; text-transform: uppercase; color: var(--text-dim);
+  }
+  .contract-table .ct-rewards { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+  .rw { min-width: 0; }
+  .rw-row { grid-template-columns: 1fr; gap: 4px; }
+  .rw-label { padding-top: 0; }
+}
+
 /* ============================================================ Contact */
 .contact-list { list-style: none; margin: 0; padding: 0 !important; display: grid; gap: 10px !important; }
 .contact-list li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--text) !important; }

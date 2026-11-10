@@ -1019,15 +1019,97 @@
   }
 
   /* ================================================================ Page: Rules */
+  // Item rarity tiers (T1-T5) as the game colours them
+  var TIER_COLORS = { 1: "#ABC8CC", 2: "#00C38F", 3: "#2671B0", 4: "#745AC5", 5: "#B8902A" };
+  function starRun(n) {
+    var out = '<span class="stars">';
+    for (var i = 0; i < n; i++) out += starSvg();
+    return out + "</span>";
+  }
+  /** [4,3,3] -> "1× ★★★★  2× ★★★" */
+  function reqGroupsHtml(reqs) {
+    var counts = {};
+    reqs.forEach(function (r) { counts[r] = (counts[r] || 0) + 1; });
+    return '<span class="req-groups">' + Object.keys(counts).map(Number).sort(function (a, b) { return b - a; }).map(function (r) {
+      return '<span class="req-group" title="' + counts[r] + " badge" + (counts[r] > 1 ? "s" : "") + " at " + tierText(r) + ' or higher"><span class="mono">' + counts[r] + "×</span> " + starRun(r) + "</span>";
+    }).join("") + "</span>";
+  }
+  var REWARD_GROUPS = [
+    { label: "Title", types: ["Title"] },
+    { label: "Profile", types: ["Avatar", "Banner", "Background"] },
+    { label: "Outfit", types: ["Hat", "Jersey", "Shorts", "Shoes"] },
+    { label: "Celebrations", types: ["Victory mood", "Finisher"] }
+  ];
+  function rewardChip(name, sub, tier, extraClass) {
+    return '<span class="reward' + (extraClass ? " " + extraClass : "") + '" style="--t:' + (TIER_COLORS[tier] || "var(--text-dim)") + '" title="' + esc(sub) + (tier ? " · Tier " + tier : "") + '">' +
+      esc(name) + (sub ? "<small>" + esc(sub) + "</small>" : "") + "</span>";
+  }
+  function rewardRow(label, chips) {
+    return '<div class="rw-row"><span class="rw-label">' + esc(label) + '</span><span class="rw-items">' + chips + "</span></div>";
+  }
+  /**
+   * Rewards for REACHING contract c: the game hands out a contract's item list (and feature unlocks) when you
+   * finish it, i.e. when you reach the next one - so they come from `prev`. The Blocks per level belong to c itself.
+   */
+  function contractRewardsHtml(c, prev) {
+    var rows = [], src = prev || {};
+    if (src.unlocks && src.unlocks.length) rows.push(rewardRow("Unlocks", src.unlocks.map(function (f) { return '<span class="reward feature">' + icon("spark", "sm") + esc(f) + "</span>"; }).join("")));
+    REWARD_GROUPS.forEach(function (g) {
+      var items = (src.rewards || []).filter(function (r) { return g.types.indexOf(r.type) >= 0; });
+      if (!items.length) return;
+      var chips;
+      if (g.label === "Profile") {
+        // avatar + banner + background of one contract share a name: show them as one set
+        var byName = {};
+        items.forEach(function (r) { (byName[r.name] = byName[r.name] || []).push(r); });
+        chips = Object.keys(byName).map(function (n) {
+          var set = byName[n];
+          return rewardChip(n, set.length === 3 ? "avatar, banner & background" : set.map(function (r) { return r.type.toLowerCase(); }).join(" & "), set[0].tier);
+        }).join("");
+      } else if (g.label === "Title") {
+        chips = items.map(function (r) { return rewardChip("“" + r.name + "”", "", r.tier, "title-chip"); }).join("");
+      } else {
+        chips = items.map(function (r) { return rewardChip(r.name, r.type.toLowerCase(), r.tier); }).join("");
+      }
+      rows.push(rewardRow(g.label, chips));
+    });
+    if (c.softCurrency) rows.push(rewardRow("Currency", '<span class="rw-money">+' + fmt(c.softCurrency) + "</span> " + esc(DATA.meta.contractCurrency || "Blocks") + " per level" + (c.endless ? " · endless" : "")));
+    return rows.length ? '<div class="rw">' + rows.join("") + "</div>" : '<span class="dim">—</span>';
+  }
+  // "Show all" for the contract ladder - disabled for now (every contract is shown). To bring it back, uncomment
+  // this block, the `half` / ct-more / ct-toggle lines in renderRules, and set contractsExpanded = false.
+  var contractsExpanded = true;
+  /*
+  function contractToggleLabel() {
+    return contractsExpanded ? "Show fewer" + icon("chevron", "sm").replace('class="i sm"', 'class="i sm" style="transform:rotate(180deg)"')
+      : "Show all " + CONTRACTS.length + " contracts" + icon("chevron", "sm");
+  }
+  function bindContractToggle(root) {
+    root.onclick = function (e) {
+      var b = e.target.closest('[data-act="toggle-contracts"]');
+      if (!b) return;
+      contractsExpanded = !contractsExpanded;
+      var table = $(".contract-table", root);
+      table.classList.toggle("expanded", contractsExpanded);
+      b.setAttribute("aria-expanded", contractsExpanded);
+      b.innerHTML = contractToggleLabel();
+      if (!contractsExpanded) table.scrollIntoView({ block: "start", behavior: "smooth" });
+    };
+  }
+  */
   function renderRules(root) {
+    // bindContractToggle(root);
     var lines = S.lines;
     var lineTable = '<div class="card table-wrap" style="max-height:none"><table class="data"><thead><tr><th>Synergy line</th><th>1★</th><th>2★</th><th>3★</th><th>' + TOP + '</th></tr></thead><tbody>' +
       lines.map(function (l) { return "<tr><td>" + lineChips(l) + "</td>" + l.tiers.map(function (t) { return '<td><a href="#combos/' + esc(l.id + ":" + t.star) + '">' + esc(t.name) + "</a></td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
-    var contractTable = '<div class="card table-wrap" style="max-height:none"><table class="data"><thead><tr><th>Contract</th><th>Levels</th><th class="hide-sm">XP per level</th><th>Badges to upgrade</th><th class="hide-sm">Reward title</th></tr></thead><tbody>' +
-      CONTRACTS.map(function (c) {
-        return "<tr><td><b>" + esc(c.name) + "</b></td><td class=\"mono\">" + (c.endless ? "∞" : c.levels) + '</td><td class="mono hide-sm">' + fmt(c.exp) + "</td><td>" + (c.slots ? c.reqs.map(starsHtml).join(" ") : '<span class="dim">None</span>') +
-          '</td><td class="hide-sm">' + (c.rewardTitles.length ? c.rewardTitles.map(esc).join(", ") : '<span class="dim">—</span>') + "</td></tr>";
+    // var half = Math.ceil(CONTRACTS.length / 2);
+    var contractTable = '<div class="card table-wrap contract-table' + (contractsExpanded ? " expanded" : "") + '" style="max-height:none"><table class="data"><thead><tr><th>Contract</th><th>Levels</th><th class="hide-sm">XP per level</th><th>Badges to upgrade</th><th>Rewards for reaching it</th></tr></thead><tbody>' +
+      CONTRACTS.map(function (c, i) {
+        return "<tr" + /* (i >= half ? ' class="ct-more"' : "") + */ '><td class="ct-name"><b>' + esc(c.name) + '</b></td><td class="mono" data-label="Levels">' + (c.endless ? "∞" : c.levels) + '</td><td class="mono hide-sm" data-label="XP per level">' + fmt(c.exp) +
+          '</td><td data-label="Badges to upgrade">' + (c.slots ? reqGroupsHtml(c.reqs) : '<span class="dim">None</span>') +
+          '</td><td class="ct-rewards">' + contractRewardsHtml(c, CONTRACTS[i - 1]) + "</td></tr>";
       }).join("") + "</tbody></table></div>";
+      // + (CONTRACTS.length > half ? '<div class="ct-toggle"><button class="btn sm" data-act="toggle-contracts" aria-expanded="' + contractsExpanded + '">' + contractToggleLabel() + "</button></div>" : "");
     var B = function (id) { return S.badgeById[id] ? S.badgeById[id].name : id; };
     var ex = [
       [[B("Goal"), B("Header"), B("Acrobat")], "Attack 3", "Attack (single)"],
@@ -1057,7 +1139,8 @@
       "<li>Level a contract by playing. At max level you can <b>upgrade</b> it and collect its rewards.</li>" +
       "<li>From <b>" + esc(PLAN_CONTRACTS[0].name) + "</b> on, upgrading needs <b>3 badges</b> at minimum ranks. The ranks work as “at least N badges of rank R or higher”, so slot order doesn't matter for requirements.</li>" +
       "<li>The 3 badges stay <b>linked to that contract</b> as part of your career history.</li></ul></div></div></div>" +
-      '<div class="section"><div class="section-head"><h2>Contract ladder</h2></div>' + contractTable + "</div>" +
+      '<div class="section"><div class="section-head"><h2>Contract ladder</h2></div>' + contractTable +
+      '<div class="tier-legend"><span>Item rarity:</span>' + [1, 2, 3, 4, 5].map(function (t) { return '<span style="--t:' + TIER_COLORS[t] + '"><i></i>Tier ' + t + "</span>"; }).join("") + "</div></div>" +
       '<div class="section"><div class="section-head"><h2>How the synergy title is picked</h2></div><div class="prose">' +
       "<ol><li><b>Count category tags.</b> Count every category the 3 badges carry. A hybrid badge adds 1 to each of its two categories. Slot order doesn't matter.</li>" +
       "<li><b>Find the top.</b> Every category with the highest count is <b>tied</b>. These are the categories the game highlights next to your slots.</li>" +

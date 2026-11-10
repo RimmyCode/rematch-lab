@@ -2,7 +2,7 @@
    Game data (c) Sloclap. Compilation (c) 2026 Rimmy (KHBIN), all rights reserved. */
 window.REMATCH_DATA = {
  "meta": {
-  "generatedAt": "2026-11-07T04:19:34+00:00",
+  "generatedAt": "2026-11-09T15:08:59+00:00",
   "configVersion": "cb2c2792-af0f-4771-8053-f1c302198bbe",
   "equipSlots": 3,
   "ranks": 4,
@@ -12,7 +12,8 @@ window.REMATCH_DATA = {
    150000,
    300000,
    500000
-  ]
+  ],
+  "contractCurrency": "Blocks"
  },
  "categories": [
   {
@@ -2600,6 +2601,35 @@ window.REMATCH_DATA = {
    "reqs": [],
    "rewardTitles": [],
    "rewardCount": 4,
+   "rewards": [
+    {
+     "id": "DA_S6_T1_Profileavatar_01",
+     "name": "Rookie",
+     "type": "Avatar",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T1_Profilebanner_01",
+     "name": "Rookie",
+     "type": "Banner",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T1_Profilebackground_01",
+     "name": "Rookie",
+     "type": "Background",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T5_Hat_05",
+     "name": "Starter cap",
+     "type": "Hat",
+     "tier": 5
+    }
+   ],
+   "unlocks": [
+    "Badges system"
+   ],
    "softCurrency": 200,
    "lockedFeatures": [
     "Badges",
@@ -2619,6 +2649,47 @@ window.REMATCH_DATA = {
     "Practice makes perfect"
    ],
    "rewardCount": 6,
+   "rewards": [
+    {
+     "id": "DA_S6_T1_Profileavatar_02",
+     "name": "Amateur",
+     "type": "Avatar",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T1_Profilebanner_02",
+     "name": "Amateur",
+     "type": "Banner",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T1_Profilebackground_02",
+     "name": "Amateur",
+     "type": "Background",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T1_Profiletitle_02",
+     "name": "Practice makes perfect",
+     "type": "Title",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T5_Pants_05",
+     "name": "Starter shorts",
+     "type": "Shorts",
+     "tier": 5
+    },
+    {
+     "id": "DA_S4_T1_VictoryMood_02",
+     "name": "Midlife crisis",
+     "type": "Victory mood",
+     "tier": 1
+    }
+   ],
+   "unlocks": [
+    "Ranked matches"
+   ],
    "softCurrency": 300,
    "lockedFeatures": [
     "RankedMatch",
@@ -2637,6 +2708,39 @@ window.REMATCH_DATA = {
     "Aspiring legend"
    ],
    "rewardCount": 5,
+   "rewards": [
+    {
+     "id": "DA_S6_T2_Profileavatar_01",
+     "name": "Semi-pro",
+     "type": "Avatar",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T2_Profilebanner_01",
+     "name": "Semi-pro",
+     "type": "Banner",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T2_Profilebackground_01",
+     "name": "Semi-pro",
+     "type": "Background",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T2_Profiletitle_26",
+     "name": "Aspiring legend",
+     "type": "Title",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T5_Shirt_05",
+     "name": "Starter jersey",
+     "type": "Jersey",
+     "tier": 5
+    }
+   ],
+   "unlocks": [],
    "softCurrency": 400,
    "lockedFeatures": []
   },
@@ -2656,6 +2760,45 @@ window.REMATCH_DATA = {
     "Spark"
    ],
    "rewardCount": 6,
+   "rewards": [
+    {
+     "id": "DA_S6_T2_Profileavatar_02",
+     "name": "Wonder",
+     "type": "Avatar",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T2_Profilebanner_02",
+     "name": "Wonder",
+     "type": "Banner",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T2_Profilebackground_02",
+     "name": "Wonder",
+     "type": "Background",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T2_Profiletitle_27",
+     "name": "Spark",
+     "type": "Title",
+     "tier": 2
+    },
+    {
+     "id": "DA_S1_T2_VictoryMood_02",
+     "name": "IDK",
+     "type": "Victory mood",
+     "tier": 2
+    },
+    {
+     "id": "DA_S6_T5_Shoes_05",
+     "name": "Starter shoes",
+     "type": "Shoes",
+     "tier": 5
+    }
+   ],
+   "unlocks": [],
    "softCurrency": 500,
    "lockedFeatures": []
   },
@@ -2675,6 +2818,39 @@ window.REMATCH_DATA = {
     "The professional"
    ],
    "rewardCount": 5,
+   "rewards": [
+    {
+     "id": "DA_S6_T3_Profileavatar_02",
+     "name": "Pro",
+     "type": "Avatar",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebanner_02",
+     "name": "Pro",
+     "type": "Banner",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebackground_02",
+     "name": "Pro",
+     "type": "Background",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profiletitle_26",
+     "name": "The professional",
+     "type": "Title",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T5_Hat_06",
+     "name": "Starlight cap",
+     "type": "Hat",
+     "tier": 5
+    }
+   ],
+   "unlocks": [],
    "softCurrency": 600,
    "lockedFeatures": []
   },
@@ -2694,6 +2870,45 @@ window.REMATCH_DATA = {
     "Shine bright"
    ],
    "rewardCount": 6,
+   "rewards": [
+    {
+     "id": "DA_S6_T3_Profileavatar_03",
+     "name": "Star",
+     "type": "Avatar",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebanner_03",
+     "name": "Star",
+     "type": "Banner",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebackground_03",
+     "name": "Star",
+     "type": "Background",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profiletitle_27",
+     "name": "Shine bright",
+     "type": "Title",
+     "tier": 3
+    },
+    {
+     "id": "DA_S2_T1_VictoryMood_03",
+     "name": "Guy above",
+     "type": "Victory mood",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T5_Pants_06",
+     "name": "Starlight shorts",
+     "type": "Shorts",
+     "tier": 5
+    }
+   ],
+   "unlocks": [],
    "softCurrency": 700,
    "lockedFeatures": []
   },
@@ -2713,6 +2928,39 @@ window.REMATCH_DATA = {
     "Titles hunter"
    ],
    "rewardCount": 5,
+   "rewards": [
+    {
+     "id": "DA_S6_T3_Profileavatar_04",
+     "name": "Champion",
+     "type": "Avatar",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebanner_04",
+     "name": "Champion",
+     "type": "Banner",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebackground_04",
+     "name": "Champion",
+     "type": "Background",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T4_Profiletitle_26",
+     "name": "Titles hunter",
+     "type": "Title",
+     "tier": 4
+    },
+    {
+     "id": "DA_S6_T5_Shirt_06",
+     "name": "Starlight jersey",
+     "type": "Jersey",
+     "tier": 5
+    }
+   ],
+   "unlocks": [],
    "softCurrency": 800,
    "lockedFeatures": []
   },
@@ -2732,6 +2980,45 @@ window.REMATCH_DATA = {
     "Myth"
    ],
    "rewardCount": 6,
+   "rewards": [
+    {
+     "id": "DA_S6_T3_Profileavatar_05",
+     "name": "Hero",
+     "type": "Avatar",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebanner_05",
+     "name": "Hero",
+     "type": "Banner",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T3_Profilebackground_05",
+     "name": "Hero",
+     "type": "Background",
+     "tier": 3
+    },
+    {
+     "id": "DA_S6_T4_Profiletitle_27",
+     "name": "Myth",
+     "type": "Title",
+     "tier": 4
+    },
+    {
+     "id": "DA_S6_T5_ShoesVFX_06",
+     "name": "Starlight shoes",
+     "type": "Shoes",
+     "tier": 5
+    },
+    {
+     "id": "DA_S2_T2_Finisher_04",
+     "name": "A star is born",
+     "type": "Finisher",
+     "tier": 2
+    }
+   ],
+   "unlocks": [],
    "softCurrency": 900,
    "lockedFeatures": []
   },
@@ -2751,6 +3038,69 @@ window.REMATCH_DATA = {
     "World-class"
    ],
    "rewardCount": 10,
+   "rewards": [
+    {
+     "id": "DA_S6_T5_Profileavatar_09",
+     "name": "Icon",
+     "type": "Avatar",
+     "tier": 5
+    },
+    {
+     "id": "DA_S6_T5_Profilebanner_09",
+     "name": "Icon",
+     "type": "Banner",
+     "tier": 5
+    },
+    {
+     "id": "DA_S6_T5_Profilebackground_09",
+     "name": "Icon",
+     "type": "Background",
+     "tier": 5
+    },
+    {
+     "id": "DA_S6_T5_Profiletitle_26",
+     "name": "World-class",
+     "type": "Title",
+     "tier": 5
+    },
+    {
+     "id": "DA_S1_T3_Finisher_03",
+     "name": "Money time",
+     "type": "Finisher",
+     "tier": 3
+    },
+    {
+     "id": "DA_S2_T1_VictoryMood_04",
+     "name": "Say what?",
+     "type": "Victory mood",
+     "tier": 1
+    },
+    {
+     "id": "DA_S6_T5_Hat_07",
+     "name": "Vibrant bucket hat",
+     "type": "Hat",
+     "tier": 5
+    },
+    {
+     "id": "DA_S6_T5_Shirt_07",
+     "name": "Vibrant shirt",
+     "type": "Jersey",
+     "tier": 5
+    },
+    {
+     "id": "DA_S6_T5_Pants_07",
+     "name": "Vibrant shorts",
+     "type": "Shorts",
+     "tier": 5
+    },
+    {
+     "id": "DA_S6_T5_ShoesVFX_07",
+     "name": "Vibrant sneakers",
+     "type": "Shoes",
+     "tier": 5
+    }
+   ],
+   "unlocks": [],
    "softCurrency": 1000,
    "lockedFeatures": []
   },
@@ -2768,6 +3118,8 @@ window.REMATCH_DATA = {
    ],
    "rewardTitles": [],
    "rewardCount": 0,
+   "rewards": [],
+   "unlocks": [],
    "softCurrency": 1100,
    "lockedFeatures": []
   }
