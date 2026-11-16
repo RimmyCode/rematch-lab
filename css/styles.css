@@ -583,16 +583,17 @@ dialog::backdrop { background: rgba(10, 10, 14, .45); backdrop-filter: blur(2px)
 .lang-btn .lang-code { font: 600 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: .04em; color: var(--text-dim); }
 .lang-menu {
   position: absolute; top: calc(100% + 8px); inset-inline-end: 0; z-index: 70;
-  min-width: 196px; max-height: min(70vh, 430px); overflow: auto;
+  min-width: 224px; max-height: min(70vh, 430px); overflow: auto;
   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
   box-shadow: 0 8px 24px rgba(20, 20, 20, .14); padding: 6px;
 }
-.lang-menu button {
+.lang-menu .lang-item {
   display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 14px;
   padding: 8px 10px; border: 0; background: none; border-radius: 8px; cursor: pointer;
-  color: var(--text); font: inherit; text-align: start;
+  color: var(--text); font: inherit; text-align: start; text-decoration: none;
+  white-space: nowrap;
 }
-.lang-menu button:hover { background: var(--surface-alt); }
-.lang-menu button[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-.lang-menu .lang-code { font: 500 10.5px "IBM Plex Mono", monospace; color: var(--text-dim); text-transform: uppercase; }
-.lang-menu .lang-native { unicode-bidi: plaintext; }
+.lang-menu .lang-item:hover { background: var(--surface-alt); }
+.lang-menu .lang-item[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.lang-menu .lang-code { font: 500 10.5px "IBM Plex Mono", monospace; color: var(--text-dim); text-transform: uppercase; flex: none; }
+.lang-menu .lang-native { unicode-bidi: plaintext; white-space: nowrap; }

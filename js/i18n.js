@@ -55,7 +55,7 @@
     var m = /[?&]lang=([^&]+)/.exec(location.search);
     if (m) {
       var q = match(decodeURIComponent(m[1]));
-      if (q) return q;
+      if (q) { save(q); return q; }
     }
     var s = stored();
     if (s && CODES.indexOf(s) >= 0) return s;
@@ -132,13 +132,15 @@
     var label = document.getElementById("lang-code");
     if (!btn || !menu) return;
 
-    if (label) label.textContent = code.toUpperCase().slice(0, 3);
+    if (label) label.textContent = code.split("-")[0].toUpperCase();
     btn.setAttribute("aria-label", t("lang.label", "Language") + ": " + meta.name);
     btn.title = t("lang.label", "Language") + ": " + meta.name;
 
+    // Real links, so choosing a language always navigates even if the click handler failed to run.
     menu.innerHTML = LANGS.map(function (l) {
-      return '<button type="button" role="option" data-lang="' + l.code + '" aria-selected="' + (l.code === code) + '"' +
-        (l.rtl ? ' dir="rtl"' : "") + '><span class="lang-native">' + l.name + '</span><span class="lang-code">' + l.code + "</span></button>";
+      var href = "?lang=" + encodeURIComponent(l.code) + (location.hash || "");
+      return '<a class="lang-item" role="option" href="' + href + '" data-lang="' + l.code + '" aria-selected="' + (l.code === code) + '">' +
+        '<span class="lang-native" dir="auto">' + l.name + '</span><span class="lang-code">' + l.code + "</span></a>";
     }).join("");
 
     function close() { menu.hidden = true; btn.setAttribute("aria-expanded", "false"); }
@@ -151,9 +153,8 @@
     menu.addEventListener("click", function (e) {
       var b = e.target.closest("[data-lang]");
       if (!b) return;
-      var next = b.dataset.lang;
-      if (next === code) { close(); return; }
-      setLang(next);
+      if (b.dataset.lang === code) { e.preventDefault(); close(); }
+      // otherwise the link navigates to ?lang=<code> and detect() persists the choice
     });
     document.addEventListener("click", function (e) { if (!host.contains(e.target)) close(); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
@@ -180,19 +181,11 @@
     }
   }
 
-  /** Remember the choice, drop ?lang=... (which would otherwise win on reload) and reload. */
+  /** Remember the choice and navigate to the query form (a plain link does the same). */
   function setLang(next) {
     if (CODES.indexOf(next) < 0 || next === code) return;
     save(next);
-    var url;
-    try {
-      url = new URL(location.href);
-      url.searchParams.delete("lang");
-      url = url.toString();
-    } catch (e) {
-      url = location.pathname + location.hash;
-    }
-    location.replace(url);
+    location.assign("?lang=" + encodeURIComponent(next) + (location.hash || ""));
   }
 
   window.I18N = {
