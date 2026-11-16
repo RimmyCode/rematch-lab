@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["pl"], {
   "rules.callout2": "Trzy hybrydy w trójkącie (np. Cold blood, Back to front i Guardian angel) dają wszystkie trzy kategorie po 2, więc dają tytuł <b>{line}</b>, nie parę.",
   "rules.all.t": "Wszystkie {n} tytuły synergii",
   "rules.craft.t": "Tworzenie synergii tytułów",
-  "rules.craft.warn": "Niepotwierdzone jako dodane",
-  "rules.craft.dim": "Pliki gry i konfiguracja live już zawierają tę funkcję i jej ceny, ale nie potwierdzono jej dostępności w grze.",
-  "rules.craft.p": "Późniejsze kontrakty odblokowują <b>tworzenie synergii tytułów</b>: możesz kupić tytuł, na który wskazują przypisane odznaki, zamiast czekać. Cena live za poziom to {prices}. Możesz kupić tylko najwyższy tytuł albo wszystkie brakujące niższe poziomy naraz, co sumuje te ceny.",
+  "rules.craft.warn": "Jeszcze niezaimplementowane w grze",
+  "rules.craft.dim": "Pliki gry i konfiguracja live zawierają tę funkcję i jej ceny, ale nie została zaimplementowana w grze.",
+  "rules.craft.p": "W grze nadal nie można kupować tytułów; funkcja istnieje tylko w danych. Dla porządku, pliki definiują te ceny za poziom: {prices}.",
   "rules.source.t": "Skąd to pochodzi",
   "rules.source.p": "Cele odznak, kategorie, wymagania kontraktów i tabela tytułów pochodzą z konfiguracji, którą gra pobiera przy logowaniu (wersja {config}). Nazwy pochodzą z plików gry ({build}). Reguła wyboru odzwierciedla logikę synergii klienta. Tytuły przyznaje serwer Sloclap, więc jeśli gra kiedyś zaprzeczy tej stronie, rację ma gra."
 });

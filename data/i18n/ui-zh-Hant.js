@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["zh-Hant"], {
   "rules.callout2": "三個混合徽章形成三角（如 Cold blood、Back to front、Guardian angel）會讓三個類別都並列 2，因此得到 <b>{line}</b> 稱號，而不是組合。",
   "rules.all.t": "全部 {n} 個協同稱號",
   "rules.craft.t": "稱號協同製作",
-  "rules.craft.warn": "未確認是否已加入",
-  "rules.craft.dim": "遊戲檔案和線上設定已包含此功能及其價格，但尚未確認遊戲內可用。",
-  "rules.craft.p": "後續合約會解鎖<b>稱號協同製作</b>：你可以直接購買已指派徽章指向的稱號，而不必等待。每級線上價格為 {prices}。你可以只買最高稱號，或一次購買所有缺少的低級稱號，價格相加。",
+  "rules.craft.warn": "遊戲內尚未實作",
+  "rules.craft.dim": "遊戲檔案和線上設定包含此功能及其價格，但遊戲內尚未實作。",
+  "rules.craft.p": "目前遊戲內無法購買稱號；此功能只存在於資料中。作為參考，檔案中定義了這些每級價格：{prices}。",
   "rules.source.t": "資料來源",
   "rules.source.p": "徽章目標、類別、合約要求和稱號表來自遊戲登入時下載的設定（版本 {config}）。名稱來自遊戲檔案（{build}）。選擇規則與客戶端的協同邏輯一致。稱號由 Sloclap 伺服器發放，所以如果遊戲與本站不一致，以遊戲為準。"
 });

@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["fr"], {
   "rules.callout2": "Trois hybrides formant un triangle (comme Cold blood, Back to front et Guardian angel) mettent les trois catégories à 2, ils donnent donc un titre <b>{line}</b>, pas une paire.",
   "rules.all.t": "Les {n} titres de synergie",
   "rules.craft.t": "Création de synergie de titre",
-  "rules.craft.warn": "Non confirmé comme déjà ajouté",
-  "rules.craft.dim": "Les fichiers du jeu et la config live contiennent déjà cette fonctionnalité et ses prix, mais sa disponibilité en jeu n'est pas confirmée.",
-  "rules.craft.p": "Les contrats suivants débloquent la <b>création de synergie de titre</b> : vous pouvez acheter le titre vers lequel vos badges assignés pointent au lieu d'attendre. Le prix live par palier est {prices}. Vous pouvez acheter seulement le titre le plus haut, ou tous les paliers inférieurs manquants d'un coup, ce qui additionne ces prix.",
+  "rules.craft.warn": "Pas encore implémenté en jeu",
+  "rules.craft.dim": "Les fichiers du jeu et la config live contiennent cette fonctionnalité et ses prix, mais elle n'a pas été implémentée dans le jeu.",
+  "rules.craft.p": "Il n'existe encore aucun moyen d'acheter des titres en jeu ; la fonctionnalité n'existe que dans les données. Pour référence, les fichiers définissent ces prix par palier : {prices}.",
   "rules.source.t": "D'où cela vient",
   "rules.source.p": "Les objectifs de badges, catégories, exigences de contrats et la table des titres viennent de la configuration que le jeu télécharge à la connexion (version {config}). Les noms viennent des fichiers du jeu ({build}). La règle de sélection reflète la logique de synergie du client. Les titres sont accordés par les serveurs de Sloclap ; si le jeu diffère un jour de cette page, c'est le jeu qui a raison."
 });

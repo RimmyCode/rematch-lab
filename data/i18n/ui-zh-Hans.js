@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["zh-Hans"], {
   "rules.callout2": "三个混合徽章形成三角（如 Cold blood、Back to front、Guardian angel）会让三个类别都并列 2，因此得到 <b>{line}</b> 称号，而不是组合。",
   "rules.all.t": "全部 {n} 个协同称号",
   "rules.craft.t": "称号协同制作",
-  "rules.craft.warn": "未确认是否已加入",
-  "rules.craft.dim": "游戏文件和在线配置已包含该功能及其价格，但尚未确认游戏内可用。",
-  "rules.craft.p": "后续合同会解锁<b>称号协同制作</b>：你可以直接购买已指派徽章指向的称号，而不必等待。每级在线价格为 {prices}。你可以只买最高称号，或一次性购买所有缺失的低级称号，价格相加。",
+  "rules.craft.warn": "游戏内尚未实现",
+  "rules.craft.dim": "游戏文件和在线配置包含此功能及其价格，但游戏内尚未实现。",
+  "rules.craft.p": "目前游戏内无法购买称号；该功能只存在于数据中。作为参考，文件中定义了这些每级价格：{prices}。",
   "rules.source.t": "数据来源",
   "rules.source.p": "徽章目标、类别、合同要求和称号表来自游戏登录时下载的配置（版本 {config}）。名称来自游戏文件（{build}）。选择规则与客户端的协同逻辑一致。称号由 Sloclap 服务器发放，所以如果游戏与本站不一致，以游戏为准。"
 });

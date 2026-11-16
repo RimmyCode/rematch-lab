@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["it"], {
   "rules.callout2": "Tre ibridi a triangolo (come Cold blood, Back to front e Guardian angel) pareggiano tutte e tre le categorie a 2, quindi danno un titolo <b>{line}</b>, non una coppia.",
   "rules.all.t": "Tutti i {n} titoli di sinergia",
   "rules.craft.t": "Crafting della sinergia dei titoli",
-  "rules.craft.warn": "Non confermato come aggiunto",
-  "rules.craft.dim": "I file di gioco e la config live contengono già questa funzione e i suoi prezzi, ma non è ancora confermata come disponibile in gioco.",
-  "rules.craft.p": "I contratti successivi sbloccano il <b>crafting della sinergia dei titoli</b>: puoi comprare il titolo verso cui puntano i badge assegnati invece di aspettare. Il prezzo live per livello è {prices}. Puoi comprare solo il titolo più alto, o tutti i livelli inferiori mancanti in una volta, sommando quei prezzi.",
+  "rules.craft.warn": "Non ancora implementato nel gioco",
+  "rules.craft.dim": "I file di gioco e la config live contengono questa funzione e i suoi prezzi, ma non è stata implementata nel gioco.",
+  "rules.craft.p": "Non esiste ancora un modo per comprare titoli nel gioco; la funzione esiste solo nei dati. Per riferimento, i file definiscono questi prezzi per livello: {prices}.",
   "rules.source.t": "Da dove viene",
   "rules.source.p": "Obiettivi dei badge, categorie, requisiti dei contratti e la tabella dei titoli vengono dalla configurazione che il gioco scarica al login (versione {config}). I nomi vengono dai file di gioco ({build}). La regola di selezione rispecchia la logica di sinergia del client. I titoli sono concessi dai server di Sloclap: se il gioco contraddice questa pagina, ha ragione il gioco."
 });

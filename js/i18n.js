@@ -31,6 +31,7 @@
     { code: "ar", name: "العربية", rtl: true }
   ];
   var KEY = "rth:lang";
+  var PACK_V = "2026-11-16c"; // bump when data/i18n packs change so clients refetch
   var CODES = LANGS.map(function (l) { return l.code; });
 
   function byCode(c) { for (var i = 0; i < LANGS.length; i++) if (LANGS[i].code === c) return LANGS[i]; return null; }
@@ -72,8 +73,8 @@
 
   // Load the packs before the rest of the page parses (synchronous, works on file:// too).
   if (code !== "en") {
-    document.write('<script src="data/i18n/names-' + code + '.js"><\/script>');
-    document.write('<script src="data/i18n/ui-' + code + '.js"><\/script>');
+    document.write('<script src="data/i18n/names-' + code + '.js?v=' + PACK_V + '"><\/script>');
+    document.write('<script src="data/i18n/ui-' + code + '.js?v=' + PACK_V + '"><\/script>');
   }
 
   function uiTable() {

@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["tr"], {
   "rules.callout2": "Üçgen oluşturan üç melez (Cold blood, Back to front ve Guardian angel gibi) üç kategoriyi de 2'de eşitler, bu yüzden çift değil <b>{line}</b> unvanı verir.",
   "rules.all.t": "Tüm {n} sinerji unvanı",
   "rules.craft.t": "Unvan sinerjisi üretimi",
-  "rules.craft.warn": "Eklendiği doğrulanmadı",
-  "rules.craft.dim": "Oyun dosyaları ve canlı yapılandırma bu özelliği ve fiyatlarını zaten içeriyor, ancak oyunda kullanılabilir olduğu henüz doğrulanmadı.",
-  "rules.craft.p": "Sonraki sözleşmeler <b>unvan sinerjisi üretimini</b> açar: atadığın rozetlerin işaret ettiği unvanı beklemek yerine satın alabilirsin. Seviye başına canlı fiyat: {prices}. Yalnızca en üst unvanı ya da eksik tüm alt seviyeleri tek seferde, fiyatları toplanarak alabilirsin.",
+  "rules.craft.warn": "Henüz oyunda uygulanmadı",
+  "rules.craft.dim": "Oyun dosyaları ve canlı yapılandırma bu özelliği ve fiyatlarını içeriyor, ancak oyunda uygulanmadı.",
+  "rules.craft.p": "Oyunda unvan satın alma yolu henüz yok; özellik yalnızca verilerde var. Bilgi için dosyalar bu seviye fiyatlarını tanımlıyor: {prices}.",
   "rules.source.t": "Bu nereden geliyor",
   "rules.source.p": "Rozet hedefleri, kategoriler, sözleşme gereksinimleri ve unvan tablosu, oyunun girişte indirdiği yapılandırmadan gelir (sürüm {config}). İsimler oyun dosyalarından gelir ({build}). Seçim kuralı istemcinin sinerji mantığını yansıtır. Unvanlar Sloclap'ın sunucuları tarafından verilir; oyun bir gün bu sayfayla çelişirse oyun haklıdır."
 });

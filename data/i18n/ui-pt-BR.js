@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["pt-BR"], {
   "rules.callout2": "Três híbridas em triângulo (como Cold blood, Back to front e Guardian angel) empatam as três categorias em 2, então dão um título <b>{line}</b>, não um par.",
   "rules.all.t": "Todos os {n} títulos de sinergia",
   "rules.craft.t": "Criação de sinergia de títulos",
-  "rules.craft.warn": "Não confirmado como adicionado",
-  "rules.craft.dim": "Os arquivos do jogo e a config ao vivo já contêm esse recurso e seus preços, mas ainda não foi confirmado como disponível no jogo.",
-  "rules.craft.p": "Contratos posteriores desbloqueiam a <b>criação de sinergia de títulos</b>: você pode comprar o título para o qual suas insígnias atribuídas apontam em vez de esperar. O preço ao vivo por nível é {prices}. Você pode comprar só o título mais alto, ou todos os níveis inferiores que faltam de uma vez, somando esses preços.",
+  "rules.craft.warn": "Ainda não implementado no jogo",
+  "rules.craft.dim": "Os arquivos do jogo e a config ao vivo contêm esse recurso e seus preços, mas ele não foi implementado no jogo.",
+  "rules.craft.p": "Ainda não há como comprar títulos no jogo; o recurso existe apenas nos dados. Para referência, os arquivos definem estes preços por nível: {prices}.",
   "rules.source.t": "De onde vem",
   "rules.source.p": "Alvos das insígnias, categorias, requisitos de contratos e a tabela de títulos vêm da configuração que o jogo baixa no login (versão {config}). Os nomes vêm dos arquivos do jogo ({build}). A regra de seleção espelha a lógica de sinergia do cliente. Os títulos são concedidos pelos servidores da Sloclap; se o jogo discordar desta página, o jogo está certo."
 });

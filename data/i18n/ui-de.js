@@ -304,9 +304,9 @@ Object.assign(window.RTH_UI["de"], {
   "rules.callout2": "Drei Hybride im Dreieck (etwa Cold blood, Back to front und Guardian angel) setzen alle drei Kategorien auf 2, sie ergeben also einen <b>{line}</b>-Titel, kein Paar.",
   "rules.all.t": "Alle {n} Synergie-Titel",
   "rules.craft.t": "Titel-Synergie-Crafting",
-  "rules.craft.warn": "Noch nicht als hinzugefügt bestätigt",
-  "rules.craft.dim": "Spieldateien und Live-Konfiguration enthalten diese Funktion und ihre Preise bereits, aber sie ist im Spiel noch nicht bestätigt verfügbar.",
-  "rules.craft.p": "Spätere Verträge schalten das <b>Titel-Synergie-Crafting</b> frei: Du kannst den Titel kaufen, auf den deine zugewiesenen Badges zeigen, statt zu warten. Der Live-Preis pro Stufe ist {prices}. Du kannst nur den höchsten Titel kaufen oder alle fehlenden niedrigeren Stufen auf einmal, deren Preise sich addieren.",
+  "rules.craft.warn": "Noch nicht im Spiel implementiert",
+  "rules.craft.dim": "Spieldateien und Live-Konfiguration enthalten diese Funktion und ihre Preise, aber sie wurde nicht im Spiel implementiert.",
+  "rules.craft.p": "Es gibt noch keine Möglichkeit, Titel im Spiel zu kaufen; die Funktion existiert nur in den Daten. Die Dateien definieren diese Preise pro Stufe: {prices}.",
   "rules.source.t": "Woher das kommt",
   "rules.source.p": "Badge-Ziele, Kategorien, Vertragsanforderungen und die Titel-Tabelle stammen aus der Konfiguration, die das Spiel beim Login lädt (Version {config}). Die Namen stammen aus den Spieldateien ({build}). Die Auswahlregel spiegelt die Synergie-Logik des Clients. Titel werden von Sloclaps Servern vergeben; falls das Spiel dieser Seite je widerspricht, hat das Spiel recht."
 });
